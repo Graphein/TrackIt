@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { ThreeDots } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 import { useAuth } from "../context/AuthContext";
 import Topo from "../components/Topo";
 import Menu from "../components/Menu";
@@ -91,7 +91,7 @@ export default function Habitos() {
             <Botoes>
               <span onClick={() => setFormVisivel(false)}>Cancelar</span>
               <button type="submit" disabled={loading}>
-                {loading ? <ThreeDots color="#fff" height={13} /> : "Salvar"}
+              {loading ? <ClipLoader color="#fff" size={15} /> : "Salvar"}
               </button>
             </Botoes>
           </Form>

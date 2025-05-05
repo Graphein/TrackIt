@@ -6,24 +6,28 @@ import "dayjs/locale/pt-br";
 import { useAuth } from "../context/AuthContext";
 import Topo from "../components/Topo";
 import Menu from "../components/Menu";
+import { ClipLoader } from "react-spinners"; // 🆕 Spinner importado
 
 dayjs.locale("pt-br");
 
 export default function Hoje() {
   const { user } = useAuth();
   const [habitos, setHabitos] = useState([]);
+  const [carregando, setCarregando] = useState(true); // 🆕 Estado de loading
 
   useEffect(() => {
     buscarHabitos();
   }, []);
 
   function buscarHabitos() {
+    setCarregando(true);
     axios
       .get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((res) => setHabitos(res.data))
-      .catch(() => alert("Erro ao buscar hábitos de hoje"));
+      .catch(() => alert("Erro ao buscar hábitos de hoje"))
+      .finally(() => setCarregando(false));
   }
 
   function alternarStatus(habito) {
@@ -52,28 +56,34 @@ export default function Hoje() {
           </p>
         </Header>
 
-        {habitos.map((h) => (
-          <Card key={h.id}>
-            <div>
-              <h3>{h.name}</h3>
-              <p>
-                Sequência atual: <span className={h.done ? "verde" : ""}>{h.currentSequence} dias</span>
-              </p>
-              <p>
-                Seu recorde:{" "}
-                <span className={h.currentSequence === h.highestSequence && h.done ? "verde" : ""}>
-                  {h.highestSequence} dias
-                </span>
-              </p>
-            </div>
-            <BotaoFeito
-              $feito={h.done}
-              onClick={() => alternarStatus(h)}
-            >
-              ✓
-            </BotaoFeito>
-          </Card>
-        ))}
+        {carregando ? (
+          <LoaderWrapper>
+            <ClipLoader color="#52B6FF" size={50} />
+          </LoaderWrapper>
+        ) : (
+          habitos.map((h) => (
+            <Card key={h.id}>
+              <div>
+                <h3>{h.name}</h3>
+                <p>
+                  Sequência atual: <span className={h.done ? "verde" : ""}>{h.currentSequence} dias</span>
+                </p>
+                <p>
+                  Seu recorde:{" "}
+                  <span className={h.currentSequence === h.highestSequence && h.done ? "verde" : ""}>
+                    {h.highestSequence} dias
+                  </span>
+                </p>
+              </div>
+              <BotaoFeito
+                $feito={h.done}
+                onClick={() => alternarStatus(h)}
+              >
+                ✓
+              </BotaoFeito>
+            </Card>
+          ))
+        )}
       </Container>
       <Menu />
     </>
@@ -135,4 +145,11 @@ const BotaoFeito = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+`;
+
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 `;

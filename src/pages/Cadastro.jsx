@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners"; 
 import logo from "../assets/logo.png";
 
 export default function Cadastro() {
@@ -35,7 +35,7 @@ export default function Cadastro() {
         <input placeholder="foto" disabled={loading} value={form.image}
           onChange={(e) => setForm({ ...form, image: e.target.value })} />
         <button disabled={loading}>
-          {loading ? <ThreeDots color="#FFF" height={13} /> : "Cadastrar"}
+          {loading ? <ClipLoader color="#FFF" size={13} /> : "Cadastrar"}
         </button>
       </form>
       <Link to="/">Já tem uma conta? Faça login!</Link>
@@ -60,9 +60,12 @@ const Container = styled.div`
     border: none;
     padding: 10px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   img {
-  width: 180px;
-  margin-bottom: 30px;
+    width: 180px;
+    margin-bottom: 30px;
   }
 `;

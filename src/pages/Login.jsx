@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { ThreeDots } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 import logo from "../assets/logo.png";
 
 export default function Login() {
@@ -21,7 +21,7 @@ export default function Login() {
         setUser(res.data);
         navigate("/hoje");
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Login falhou!");
         setLoading(false);
       });
@@ -46,7 +46,7 @@ export default function Login() {
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
         <button disabled={loading}>
-          {loading ? <ThreeDots color="#FFF" height={13} /> : "Entrar"}
+          {loading ? <ClipLoader color="#FFF" size={13} /> : "Entrar"}
         </button>
       </form>
       <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
@@ -71,10 +71,12 @@ const Container = styled.div`
     border: none;
     padding: 10px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   img {
-  width: 180px;
-  margin-bottom: 30px;
+    width: 180px;
+    margin-bottom: 30px;
   }
-
 `;

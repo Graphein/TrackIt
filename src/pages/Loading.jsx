@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { ThreeDots } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 
 export default function Loading() {
   return (
     <Container>
-      <ThreeDots color="#52B6FF" height={80} />
+      <ClipLoader color="#52B6FF" size={80} />
     </Container>
   );
 }
