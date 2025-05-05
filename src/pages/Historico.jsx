@@ -8,7 +8,7 @@ export default function Historico() {
       <Topo />
       <Container>
         <h2>Histórico</h2>
-        <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
+        <p>Em breve você poderá ver histórico dos seus hábitos aqui!</p>
       </Container>
       <Menu />
     </>
