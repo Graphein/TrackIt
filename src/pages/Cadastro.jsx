@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners"; 
-import logo from "../assets/logo.png";
+import logo from "../assets/Logo.png";
 
 export default function Cadastro() {
   const [form, setForm] = useState({ email: "", name: "", image: "", password: "" });
