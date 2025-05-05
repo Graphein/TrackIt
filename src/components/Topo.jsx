@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useAuth } from "../context/AuthContext";
-import MenuIcon from "../assets/Menu.png";
+import MenuIcon from "../assets/menu.png";
 
 export default function Topo() {
   const { user } = useAuth();

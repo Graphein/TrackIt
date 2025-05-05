@@ -6,14 +6,14 @@ import "dayjs/locale/pt-br";
 import { useAuth } from "../context/AuthContext";
 import Topo from "../components/Topo";
 import Menu from "../components/Menu";
-import { ClipLoader } from "react-spinners"; // 🆕 Spinner importado
+import { ClipLoader } from "react-spinners"; 
 
 dayjs.locale("pt-br");
 
 export default function Hoje() {
   const { user } = useAuth();
   const [habitos, setHabitos] = useState([]);
-  const [carregando, setCarregando] = useState(true); // 🆕 Estado de loading
+  const [carregando, setCarregando] = useState(true); 
 
   useEffect(() => {
     buscarHabitos();
